@@ -16,39 +16,48 @@ describe('Fetch user check-in history service', () => {
     it('should be able to search for gym', async () => {
         await gymsRepository.create({
             title: 'Test Gym',
-            
+            description: 'Test Test Gym',
+            latitude: 21.8270638,
+            longitude: -42.0198724,
+            phone: '27426355'
         })
 
         await gymsRepository.create({
-            gym_id: 'gym-2',
-            user_id: 'user-1'
+            title: 'Test 2 Gym',
+            description: 'Test Test Gym',
+            latitude: 21.8270638,
+            longitude: -42.0198724,
+            phone: '27426355'
         })
 
-        const { checkIns } = await sut.handle({
-            userId: 'user-1',
+        const { gyms } = await sut.handle({
+            name: '2',
             page: 1
         })
 
-        expect(checkIns).toHaveLength(2)
-        expect(checkIns).toEqual([expect.objectContaining({ gym_id: 'gym-1' }), expect.objectContaining({  gym_id: 'gym-2' })])
+        expect(gyms).toHaveLength(1)
+        expect(gyms).toEqual([expect.objectContaining({ title: 'Test 2 Gym' })])
     })
 
-    it('should be able to fetch paginated check-in history', async () => {
+    it('should be able to fetch paginated gyms search', async () => {
+
         for (let i = 1; i <= 22; i++) {
             await gymsRepository.create({
-                gym_id: `gym-${i}`,
-                user_id: 'user-1'
+                title: `Test Gym ${i}`,
+                description: 'Test Test Gym',
+                latitude: 21.8270638,
+                longitude: -42.0198724,
+                phone: '27426355'
             })
-            
         }
 
-        const { checkIns } = await sut.handle({
-            userId: 'user-1',
+        const { gyms } = await sut.handle({
+            name: 'Test Gym',
             page: 2
         })
 
-        expect(checkIns).toHaveLength(2)
-        expect(checkIns).toEqual([expect.objectContaining({ gym_id: 'gym-21' }), expect.objectContaining({  gym_id: 'gym-22' })])
+        expect(gyms).toHaveLength(2)
+        expect(gyms).toEqual([ expect.objectContaining({ title: 'Test Gym 21' }), expect.objectContaining({ title: 'Test Gym 22' }) ])
     })
 
 })
