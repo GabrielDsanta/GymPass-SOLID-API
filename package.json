@@ -1,0 +1,44 @@
+{
+  "name": "solid-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run --dit src/test",
+    "test:watch": "vitest run --dit src/test",
+    "test:e2e": "vitest run --dir src/testHttp",
+    "test:coverage": "vitest run --coverage",
+    "test:create-prisma-environment": "npm link ./prisma/vitest-environment-prisma",
+    "test:install-prisma-environment": "npm link vitest-environment-prisma",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup src --out-dir build",
+    "start": "node build/serve.js",
+    "pretest:e2e": "run-s test:create-prisma-environment test:install-prisma-environment"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcryptjs": "2.4.2",
+    "@types/node": "^20.2.1",
+    "@types/supertest": "2.0.12",
+    "@vitest/coverage-c8": "0.31.1",
+    "npm-run-all": "4.1.5",
+    "prisma": "4.14.1",
+    "supertest": "6.3.3",
+    "tsup": "^6.7.0",
+    "tsx": "^3.12.7",
+    "typescript": "^5.0.4",
+    "vite-tsconfig-paths": "4.2.0",
+    "vitest": "0.31.1"
+  },
+  "dependencies": {
+    "@fastify/jwt": "7.0.0",
+    "@prisma/client": "4.14.1",
+    "bcryptjs": "2.4.3",
+    "dayjs": "1.11.7",
+    "dotenv": "16.0.3",
+    "fastify": "^4.17.0",
+    "zod": "3.21.4"
+  }
+}
