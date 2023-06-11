@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest run --dit src/test",
-    "test:watch": "vitest run --dit src/test",
+    "test": "vitest run --dir src/test",
+    "test:watch": "vitest run --dir src/test",
     "test:e2e": "vitest run --dir src/testHttp",
     "test:coverage": "vitest run --coverage",
     "test:create-prisma-environment": "npm link ./prisma/vitest-environment-prisma",
